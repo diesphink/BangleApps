@@ -163,7 +163,7 @@ function icon_unknown() {
 
 getDayWeather = function (json) {
   let codes = json.hourly.map((v) => wwoCodeToIcon(v.weatherCode));
-  return mode(codes);
+  return parseInt(mode(codes));
 };
 
 function mode(a) {
