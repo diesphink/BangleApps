@@ -41,7 +41,7 @@ exports.drawCalendar = function (date) {
     let hoje = new Date();
     let amanha = new Date();
     amanha.setDate(amanha.getDate() + 1);
-    outraSemana = new Date();
+    let outraSemana = new Date();
     outraSemana.setDate(outraSemana.getDate() + 7);
 
     if (data.getDate() == hoje.getDate()) data = "HOJE";
@@ -61,7 +61,7 @@ exports.drawCalendar = function (date) {
     g.setColor("#000");
 
     g.setFontLECO1976Regular11();
-    width = g.stringWidth(data) + 3;
+    let width = g.stringWidth(data) + 3;
 
     let x = 173 - width;
     let y = 112;
@@ -72,19 +72,19 @@ exports.drawCalendar = function (date) {
 
     g.setFont("6x8");
 
-    startY = 122;
-    endY = 171;
+    let startY = 122;
+    let endY = 171;
 
     g.setColor("#F00");
     g.fillRect(4, startY, 41, endY);
 
     var spaceEach = (endY - startY) / schedules.length;
 
-    xTime = 38;
-    xDesc = 45;
+    let xTime = 38;
+    let xDesc = 45;
 
     for (var i = 0; i < schedules.length; i++) {
-      v = schedules[i];
+      let v = schedules[i];
       var textTime = v.data.getHours() + "h";
       if (v.data.getMinutes() > 0)
         textTime += v.data.getMinutes().toString().padStart(2, "0");

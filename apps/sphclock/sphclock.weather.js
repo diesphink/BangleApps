@@ -5,16 +5,16 @@
 // Source: http://www.worldweatheronline.com/feed/wwoConditionCodes.txt
 
 function dateToISO(date) {
-  ano = date.getFullYear();
+  let ano = date.getFullYear();
 
-  mes = ("00" + (date.getMonth() + 1)).slice(-2);
-  dia = ("00" + date.getDate()).slice(-2);
+  let mes = ("00" + (date.getMonth() + 1)).slice(-2);
+  let dia = ("00" + date.getDate()).slice(-2);
   return ano + "-" + mes + "-" + dia;
 }
 
 exports.drawWeather = function () {
   let hoje = new Date();
-  hoje = dateToISO(date);
+  hoje = dateToISO(hoje);
 
   let weather = require("Storage").readJSON("weather.json", false);
   if (weather) {
@@ -32,7 +32,7 @@ exports.drawWeather = function () {
 
     g.setFontLECO1976Regular12();
     g.setFontAlign(0, -1);
-    sphweather = require("sphweather.icons.js");
+    let sphweather = require("sphweather.icons.js");
     for (let i = 0; i < 3; i++) {
       let temp = "??"
       if (i < weather.length) {

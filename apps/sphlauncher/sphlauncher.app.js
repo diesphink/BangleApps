@@ -57,7 +57,6 @@ var Napps = apps.length;
 var Npages = Math.ceil(Napps / 9);
 var maxPage = Npages - 1;
 var selected = -1;
-var oldselected = -1;
 var page = 0;
 const XOFF = 4;
 const YOFF = 0;
@@ -124,14 +123,14 @@ function draw_launcher(p, n, selected) {
 }
 
 function draw_icon(app, name, cx, cy, small) {
+  let options = {};
+  let x = cx - 12;
+  let y = cy - 12;
+
   if (small) {
     options = { scale: 0.66 };
     x = cx - 8;
     y = cy - 8;
-  } else {
-    options = {};
-    x = cx - 12;
-    y = cy - 12;
   }
 
   if (name == "Weather") {
@@ -267,9 +266,9 @@ function circle_banner_down(app, name, x, y, selected) {
   g.fillRect(x + 2, y + h - 16, x + w - 3, y + h - 4);
 
   g.setColor("#F00");
-  px = x + 2;
-  py = y + h - 15;
-  banner_points = [
+  let px = x + 2;
+  let py = y + h - 15;
+  let banner_points = [
     px,
     py,
     px + 3,
@@ -322,16 +321,16 @@ function circle_banner_middle(app, name, x, y, selected) {
   }
   draw_icon(app, name, x + w / 2, y + h / 2 - 10, true);
 
-  for (i = -4; i <= 4; i += 4)
-    drawBolt(x + w / 2 + i, y + h / 2 + 11, selected? "#FFF":"#000", selected? "#F00":"#FFF");
+  for (let i = -4; i <= 4; i += 4)
+    drawBolt(x + w / 2 + i, y + h / 2 + 11, selected ? "#FFF" : "#000", selected ? "#F00" : "#FFF");
 
   g.setColor("#FFF");
   g.fillRect(x + 2, y + h / 2 - 4, x + w - 3, y + h / 2 + 8);
 
   g.setColor("#F00");
-  px = x + 2;
-  py = y + h / 2 - 4;
-  banner_points = [
+  let px = x + 2;
+  let py = y + h / 2 - 4;
+  let banner_points = [
     px,
     py,
     px + 3,
@@ -365,8 +364,8 @@ function square_with_ribbon(app, name, x, y, selected) {
   var placWidth = 42;
 
   g.setColor("#000");
-  px = x + Math.floor((w - placWidth) / 2);
-  py = y + 5;
+  let px = x + Math.floor((w - placWidth) / 2);
+  let py = y + 5;
   g.drawPoly(octo(px, py, px + placWidth, py + placHeight, 3));
 
   if (selected) g.setColor("#F00");
@@ -442,7 +441,6 @@ function drawPage(p) {
 
 Bangle.on("swipe", (dir) => {
   selected = 0;
-  oldselected = -1;
   if (dir < 0) {
     ++page;
     if (page > maxPage) page = 0;
@@ -458,8 +456,8 @@ function isTouched(p, n) {
   var range_x = 191;
   var range_y = 189;
 
-  tam_x = Math.ceil(range_x / 3);
-  tam_y = Math.ceil(range_y / 3);
+  let tam_x = Math.ceil(range_x / 3);
+  let tam_y = Math.ceil(range_y / 3);
 
   if (n < 0 || n > 8) return false;
   var x1 = (n % 3) * tam_x;

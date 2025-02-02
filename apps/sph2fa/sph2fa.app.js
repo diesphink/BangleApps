@@ -1,5 +1,3 @@
-const tokenextraheight = 16;
-var tokendigitsheight = 30;
 // Hash functions
 const crypto = require("crypto");
 const algos = {
@@ -8,7 +6,6 @@ const algos = {
   SHA1: { sha: crypto.SHA1, retsz: 20, blksz: 64 },
 };
 const calculating = "Calculating";
-const notokens = "No tokens";
 const notsupported = "Not supported";
 
 // sample settings:
@@ -17,7 +14,7 @@ var settings = require("Storage").readJSON("authentiwatch.json", true) || {
   tokens: [],
   misc: {},
 };
-if (settings.tokens) tokens = settings.tokens; /* v0.03+ settings */
+if (settings.tokens) var tokens = settings.tokens; /* v0.03+ settings */
 
 // QR Code Text
 //
@@ -133,7 +130,7 @@ function updateMenuForToken(token) {
     value: "...",
   };
   E.showMenu(mainmenu);
-  otp = hotp(new Date(), token, true).hotp;
+  var otp = hotp(new Date(), token, true).hotp;
   mainmenu[token.label] = {
     value: otp,
     step: 0,

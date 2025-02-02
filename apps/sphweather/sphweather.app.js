@@ -1,6 +1,6 @@
 require("FontLECO1976Regular.js").add14(Graphics);
 
-drawBackground = function () {
+let drawBackground = function () {
   g.setColor("#000");
   g.fillRect(0, 0, 175, 175);
   g.setColor("#FFF");
@@ -49,10 +49,10 @@ function draw() {
     minC = Math.floor(minC / 5) * 5;
     maxC = Math.ceil(maxC / 5) * 5;
 
-    min_x = 22;
-    min_y = 32;
-    max_x = 172;
-    max_y = 124;
+    let min_x = 22;
+    let min_y = 32;
+    let max_x = 172;
+    let max_y = 124;
 
     // Grid horizontal
     for (let y = maxC - 5; y >= minC + 5; y -= 5) {
@@ -112,7 +112,7 @@ function draw() {
     }
 
     // Forecast icons
-    counter = 0;
+    let counter = 0;
     let ic = require("sphweather.icons.js");
 
     for (let d = 0; d < 3 && counter <= 5; d++) {
@@ -168,9 +168,9 @@ function drawStringWithFullBorder(text, color, border, x, y) {
 }
 
 function dateToISO(date) {
-  ano = date.getFullYear();
-  mes = ("00" + (date.getMonth() + 1)).slice(-2);
-  dia = ("00" + date.getDate()).slice(-2);
+  let ano = date.getFullYear();
+  let mes = ("00" + (date.getMonth() + 1)).slice(-2);
+  let dia = ("00" + date.getDate()).slice(-2);
   return ano + "-" + mes + "-" + dia;
 }
 

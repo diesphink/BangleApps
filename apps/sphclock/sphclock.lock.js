@@ -1,6 +1,6 @@
 exports.drawLocked1 = function () {
-  x = 128;
-  y = 5;
+  let x = 128;
+  let y = 5;
 
   if (Bangle.isLocked()) {
     g.setFontLECO1976Regular14();
@@ -16,6 +16,8 @@ exports.drawLocked1 = function () {
 };
 
 exports.drawLocked2 = function () {
+  let x = 0;
+  let y = 0;
   if (Bangle.isLocked()) {
     g.setFontAlign(0, -1);
     g.setColor("#000");

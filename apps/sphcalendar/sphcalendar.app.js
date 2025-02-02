@@ -24,7 +24,7 @@ let getMeses = function () {
   return dates;
 };
 
-drawBackground = function () {
+let drawBackground = function () {
   g.setColor("#000");
   g.fillRect(0, 0, 175, 175);
   g.setColor("#FFF");

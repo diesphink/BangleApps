@@ -1,4 +1,4 @@
-wwoCodeToIcon = function (code) {
+let wwoCodeToIcon = function (code) {
   switch (code) {
     case 113:
       return 0; // Clear
@@ -60,7 +60,7 @@ wwoCodeToIcon = function (code) {
   }
 };
 
-getIcon = function (icon, night) {
+let getIcon = function (icon, night) {
   switch (icon) {
     case 0:
       return icon_clear(night);
@@ -123,13 +123,14 @@ function icon_storm() {
     )
   );
 }
-function icon_severe() {
-  return require("heatshrink").decompress(
-    atob(
-      "jEYxH+AHBDGCyGBAAoYOCwJ1IFp0A2gAEEAQXLq1WC44IBC75UDC5ZiGgErAAQEBC44ODDAgXEBYQXGBYgXcAAxHHYY4XXDBjyRDwIXECRoODGowOHC0ReDCyBfHCx4XGRhwbEI4oAQXKAAT"
-    )
-  );
-}
+// function icon_severe() {
+//   return require("heatshrink").decompress(
+//     atob(
+//       "jEYxH+AHBDGCyGBAAoYOCwJ1IFp0A2gAEEAQXLq1WC44IBC75UDC5ZiGgErAAQEBC44ODDAgXEBYQXGBYgXcAAxHHYY4XXDBjyRDwIXECRoODGowOHC0ReDCyBfHCx4XGRhwbEI4oAQXKAAT"
+//     )
+//   );
+// }
+
 function icon_showers() {
   return require("heatshrink").decompress(
     atob(
@@ -161,13 +162,13 @@ function icon_unknown() {
   );
 }
 
-getDayWeather = function (json) {
+let getDayWeather = function (json) {
   let codes = json.hourly.map((v) => wwoCodeToIcon(v.weatherCode));
   return parseInt(mode(codes));
 };
 
 function mode(a) {
-  counts = a.reduce((count, e) => {
+  let counts = a.reduce((count, e) => {
     if (!(e in count)) count[e] = 1;
     else count[e]++;
     return count;

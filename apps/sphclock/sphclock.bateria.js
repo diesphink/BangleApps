@@ -32,8 +32,8 @@ exports.drawBattery = function (x, y, steps, step_size) {
   y += 2;
 
   g.setColor("#F00");
-  step = 100 / (steps + 1);
-  for (i = steps; i >= 0; i--) {
+  let step = 100 / (steps + 1);
+  for (let i = steps; i >= 0; i--) {
     if (battery > i * step)
       if (Bangle.isCharging()) g.setColor("#00F");
       else g.setColor("#F00");

@@ -24,7 +24,7 @@ let queueDraw = function () {
 };
 
 let draw = function (condition) {
-  date = new Date();
+  let date = new Date();
   var currentDate = require("locale").date(date, 1);
 
   g.reset();
@@ -52,8 +52,6 @@ g.clear();
 
 // draw immediately at first, queue update
 draw(INIT);
-
-function touched_date() {}
 
 Bangle.on("charging", function () {
   draw(CHARGE_CHANGE);
