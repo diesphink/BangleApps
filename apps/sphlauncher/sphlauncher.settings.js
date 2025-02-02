@@ -1,6 +1,6 @@
-(function(back) {
+(function (back) {
   var FILE = "sphlauncher.json";
-  
+
   var settings = Object.assign({
     showClocks: true,
     showLaunchers: true,
@@ -12,11 +12,10 @@
   }
 
   E.showMenu({
-    "" : { "title" : "SPH Launcher" },
-    "< Back" : () => back(),
+    "": { "title": "SPH Launcher" },
+    "< Back": () => back(),
     'Show clocks': {
       value: settings.showClocks,
-      format: v => v?"On":"Off",
       onchange: v => {
         settings.showClocks = v;
         writeSettings();
@@ -24,7 +23,6 @@
     },
     'Show launchers': {
       value: settings.showLaunchers,
-      format: v => v?"On":"Off",
       onchange: v => {
         settings.showLaunchers = v;
         writeSettings();
@@ -32,7 +30,6 @@
     },
     'Direct launch': {
       value: settings.direct,
-      format: v => v?"On":"Off",
       onchange: v => {
         settings.direct = v;
         writeSettings();
