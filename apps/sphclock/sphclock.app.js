@@ -1,0 +1,82 @@
+// timeout used to update every minute
+var drawTimeout;
+
+const INIT = 0;
+const TIMER = 1;
+const CHARGE_CHANGE = 2;
+const LOCK_CHANGE = 3;
+
+let lastDate;
+
+require("FontLECO1976Regular.js").add42(Graphics);
+require("FontLECO1976Regular.js").add20(Graphics);
+require("FontLECO1976Regular.js").add14(Graphics);
+require("FontLECO1976Regular.js").add12(Graphics);
+require("FontLECO1976Regular.js").add11(Graphics);
+
+// schedule a draw for the next minute
+let queueDraw = function () {
+  if (drawTimeout) clearTimeout(drawTimeout);
+  drawTimeout = setTimeout(function () {
+    drawTimeout = undefined;
+    draw(TIMER);
+  }, 60000 - (Date.now() % 60000));
+};
+
+let draw = function (condition) {
+  let date = new Date();
+  var currentDate = require("locale").date(date, 1);
+
+  g.reset();
+
+  if (condition == INIT || lastDate != currentDate) {
+    require("sphclock.background.js").drawBackground();
+    require("sphclock.clock.js").drawClockBackground(53);
+    require("sphclock.agenda.js").drawCalendar(date);
+    require("sphclock.weather.js").drawWeather();
+    lastDate = currentDate;
+  }
+
+  if (condition == INIT || condition == TIMER || condition == LOCK_CHANGE) {
+    require("sphclock.clock.js").drawClock(date, 53);
+    require("sphclock.lock.js").drawLocked();
+  }
+  if (condition == INIT || condition == TIMER || condition == CHARGE_CHANGE)
+    require("sphclock.bateria.js").drawBattery(158, 7);
+
+  queueDraw();
+};
+
+// Clear the screen once, at startup
+g.clear();
+
+// draw immediately at first, queue update
+draw(INIT);
+
+Bangle.on("charging", function () {
+  draw(CHARGE_CHANGE);
+});
+
+Bangle.on("lock", function () {
+  draw(LOCK_CHANGE);
+});
+
+Bangle.on("touch", function (button, xy) {
+  // Touch on date
+  if (xy.x < 88 && xy.y < 53) {
+    Bangle.buzz(100, 0.1).then(() => load("sphcalendar.app.js"));
+  }
+
+  // Touch on weather
+  if (xy.x > 88 && xy.y < 53) {
+    Bangle.buzz(100, 0.1).then(() => load("sphweather.app.js"));
+  }
+
+  // Touch on alarm
+  if (xy.y > 53 && xy.y < 121) {
+    Bangle.buzz(100, 0.1).then(() => load("alarm.app.js"));
+  }
+});
+
+// Show launcher when middle button pressed
+Bangle.setUI("clock");
